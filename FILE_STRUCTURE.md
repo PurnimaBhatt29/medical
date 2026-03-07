@@ -30,7 +30,6 @@ medvision-ai/
 │
 ├── 📄 requirements.txt                     # Python dependencies
 ├── 📄 .env.example                         # Environment template
-├── 📄 .gitignore                           # Git ignore rules
 │
 ├── 📚 README.md                            # Main documentation
 ├── 📚 QUICK_START.md                       # 5-minute setup guide
@@ -298,19 +297,9 @@ medvision-ai/
   - HF_TOKEN
 - **Usage**: Copy to `.env` and fill in
 
-#### `.gitignore`
-- **Purpose**: Git ignore rules
-- **Ignores**:
-  - Python cache
-  - Virtual environments
-  - ChromaDB data
-  - Environment files
-  - IDE files
-  - OS files
-
 ## File Statistics
 
-### Total Files: 25
+### Total Files: 24
 
 #### By Category:
 - **Agent files**: 8 (base + 6 specialized + 1 evaluation)
@@ -318,12 +307,12 @@ medvision-ai/
 - **Core application**: 3 (app, config, ingestion)
 - **Scripts**: 3 (run, test, generate)
 - **Documentation**: 5 (README, guides, overview)
-- **Configuration**: 3 (requirements, env, gitignore)
+- **Configuration**: 2 (requirements, env)
 
 #### By Type:
 - **Python files**: 16
 - **Markdown files**: 5
-- **Config files**: 3
+- **Config files**: 2
 - **Init files**: 2
 
 ### Total Lines of Code: ~2,500
@@ -396,9 +385,9 @@ generate_sample_data.py
 ### For Contributors:
 1. Read all documentation
 2. Run `test_system.py` to verify setup
-3. Check `.gitignore` before committing
-4. Follow existing code patterns
-5. Update documentation for changes
+3. Follow existing code patterns
+4. Update documentation for changes
+5. Test thoroughly before deployment
 
 ## File Modification Guide
 

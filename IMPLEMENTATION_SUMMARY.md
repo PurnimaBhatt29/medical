@@ -47,7 +47,6 @@ All requirements have been successfully implemented in this production-ready med
   - Knowledge base queries
 
 ### 4. Technology Stack ✓
-- [x] **Ollama**: Local LLM integration (Llama3/Mistral)
 - [x] **Groq**: Fast cloud inference
 - [x] **HuggingFace**: Transformers and vision models
 - [x] **LangChain**: RAG orchestration
@@ -225,7 +224,6 @@ medvision-ai/
 ├── generate_sample_data.py  # Sample generator
 ├── requirements.txt     # Dependencies
 ├── .env.example         # Environment template
-├── .gitignore          # Git ignore
 └── Documentation/       # 6 markdown files
 ```
 
@@ -270,7 +268,7 @@ medvision-ai/
 - Embedding: sentence-transformers/all-MiniLM-L6-v2
 - Vision: nickmuchi/vit-finetuned-chest-xray-pneumonia
 - Cross-Encoder: cross-encoder/ms-marco-MiniLM-L-6-v2
-- LLM: Ollama (llama3) or Groq (llama3-70b-8192)
+- LLM: Groq (llama-3.3-70b-versatile)
 
 ### Chunking
 - Parent: 1000 tokens
@@ -322,7 +320,6 @@ medvision-ai/
 - [x] Medical disclaimers
 
 ### Technical Requirements
-- [x] Ollama integration
 - [x] Groq integration
 - [x] HuggingFace models
 - [x] LangChain orchestration

@@ -32,14 +32,6 @@ cp .env.example .env
 GROQ_API_KEY=gsk_your_key_here
 ```
 
-### Option B: Ollama (Local & Private)
-
-1. Install: [ollama.ai](https://ollama.ai)
-2. Pull model:
-```bash
-ollama pull llama3
-```
-
 ## 📊 Data Setup (1 minute)
 
 ```bash
@@ -99,7 +91,7 @@ pip install -r requirements.txt
 
 ### "Failed to initialize agents"
 - Check `.env` file exists
-- Verify API key or Ollama running
+- Verify GROQ_API_KEY is correct
 
 ### "ChromaDB not found"
 ```bash

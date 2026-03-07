@@ -3,12 +3,15 @@ from utils.rag_pipeline import RAGPipeline
 import config
 
 try:
-    if config.GROQ_API_KEY:
-        from langchain_groq import ChatGroq
-        llm = ChatGroq(api_key=config.GROQ_API_KEY, model_name=config.GROQ_MODEL, temperature=0.3)
-    else:
-        from langchain_community.llms import Ollama
-        llm = Ollama(model=config.OLLAMA_MODEL, base_url=config.OLLAMA_BASE_URL)
+    if not config.GROQ_API_KEY:
+        raise ValueError("GROQ_API_KEY is required. Please set it in your .env file.")
+    
+    from langchain_groq import ChatGroq
+    llm = ChatGroq(
+        api_key=config.GROQ_API_KEY,
+        model_name=config.GROQ_MODEL,
+        temperature=0.3
+    )
 
     pipeline = RAGPipeline(
         llm=llm,

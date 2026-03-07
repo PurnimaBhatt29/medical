@@ -17,7 +17,7 @@ A production-ready, advanced medical AI assistant built with Streamlit, featurin
 - **Advanced RAG**: HyDE retrieval + parent-child chunking + cross-encoder reranking
 - **Multimodal Processing**: Text (PDF), images (X-rays), and conversational queries
 - **Vector Database**: ChromaDB with persistent storage
-- **Multiple LLM Support**: Ollama (local) and Groq (cloud) integration
+- **LLM Integration**: Groq cloud API for fast inference
 
 ### 🎨 Beautiful UI
 - Medical-themed design with soft blue/teal/white gradients
@@ -30,17 +30,14 @@ A production-ready, advanced medical AI assistant built with Streamlit, featurin
 ## 📋 Prerequisites
 
 - Python 3.9+
-- Ollama (for local LLM) OR Groq API key
+- Groq API key (free)
 - 8GB+ RAM recommended
 - Internet connection for initial model downloads
 
 ## 🚀 Installation
 
-### 1. Clone the Repository
-```bash
-git clone <repository-url>
-cd medvision-ai
-```
+### 1. Get the Project
+Download the project folder and navigate to it in your terminal.
 
 ### 2. Create Virtual Environment
 ```bash
@@ -66,21 +63,11 @@ cp .env.example .env
 
 Edit `.env` with your credentials:
 ```env
-# Option 1: Use Groq (recommended for speed)
+# Groq API (required)
 GROQ_API_KEY=your_groq_api_key_here
-
-# Option 2: Use Ollama (local, private)
-OLLAMA_BASE_URL=http://localhost:11434
 
 # Optional: HuggingFace token for private models
 HF_TOKEN=your_huggingface_token_here
-```
-
-### 5. Install Ollama (if using local LLM)
-```bash
-# Visit https://ollama.ai and install
-# Then pull the model:
-ollama pull llama3
 ```
 
 ## 📊 Data Ingestion (REQUIRED)
@@ -250,8 +237,8 @@ This project is for educational purposes. Consult legal requirements for medical
 
 ### Issue: "Failed to initialize agents"
 - **Solution**: Check `.env` file configuration
-- Ensure Ollama is running (if using local LLM)
-- Verify Groq API key (if using Groq)
+- Verify Groq API key is correct
+- Ensure internet connection is working
 
 ### Issue: "No documents found in knowledge base"
 - **Solution**: Run `python data_ingestion.py` first
@@ -266,9 +253,9 @@ This project is for educational purposes. Consult legal requirements for medical
 ## 📞 Support
 
 For issues and questions:
-- Open a GitHub issue
 - Check documentation
 - Review configuration settings
+- Consult the troubleshooting section
 
 ## 🎯 Roadmap
 

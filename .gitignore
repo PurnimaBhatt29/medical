@@ -23,7 +23,7 @@ wheels/
 .installed.cfg
 *.egg
 
-# Environment
+# Environment - IMPORTANT: Never commit API keys!
 .env
 .venv
 

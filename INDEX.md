@@ -160,7 +160,6 @@ Welcome to MedVision AI! This index will help you find the right documentation f
 ### Configuration
 - **`requirements.txt`** - Python dependencies
 - **`.env.example`** - Environment template
-- **`.gitignore`** - Git ignore rules
 
 ## 🔍 Quick Reference
 

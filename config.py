@@ -5,16 +5,12 @@ load_dotenv()
 
 # API Configuration
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-# On Streamlit deploy there is no local Ollama server, so default to empty.
-OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "")
 HF_TOKEN = os.getenv("HF_TOKEN", "")
 
 # Model Configuration
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 VISION_MODEL = "nickmuchi/vit-finetuned-chest-xray-pneumonia"
 CROSS_ENCODER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
-OLLAMA_MODEL = "llama3"
-# GROQ_MODEL = "llama3-70b-8192"
 GROQ_MODEL = "llama-3.3-70b-versatile"
 
 # Chunking Configuration

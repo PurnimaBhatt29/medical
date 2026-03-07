@@ -12,7 +12,7 @@ Before starting, make sure you have:
 - ✅ 8GB+ RAM (16GB recommended)
 - ✅ 5GB free disk space
 - ✅ Internet connection
-- ✅ Either Groq API key (free) OR Ollama installed
+- ✅ Groq API key (free)
 
 ## 🎯 Choose Your Path
 
@@ -34,12 +34,6 @@ Balanced approach with explanations.
 1. Download the project ZIP file
 2. Extract to a folder (e.g., `C:\medvision-ai` or `~/medvision-ai`)
 3. Open terminal/command prompt in that folder
-
-### Option 2: Git Clone
-```bash
-git clone <repository-url>
-cd medvision-ai
-```
 
 ## 🐍 Step 2: Set Up Python Environment
 
@@ -80,9 +74,9 @@ This will take 5-10 minutes. It installs:
 
 ## 🔑 Step 3: Configure API Keys
 
-You need either Groq (recommended) OR Ollama (local).
+You need a Groq API key (free and fast).
 
-### Option A: Groq (Recommended - Fast & Free)
+### Groq Setup (Fast & Free)
 
 **Why Groq?**
 - ✅ Very fast inference (~1-2 seconds)
@@ -105,44 +99,6 @@ cp .env.example .env
 # Add your Groq API key:
 GROQ_API_KEY=gsk_your_actual_key_here
 ```
-
-### Option B: Ollama (Local & Private)
-
-**Why Ollama?**
-- ✅ Runs locally (private)
-- ✅ No API costs
-- ✅ Works offline
-- ✅ Full control
-
-**Setup:**
-1. Install Ollama:
-   - **Windows/Mac**: Download from [ollama.ai](https://ollama.ai)
-   - **Linux**: `curl -fsSL https://ollama.ai/install.sh | sh`
-
-2. Pull model:
-```bash
-ollama pull llama3
-```
-
-3. Verify:
-```bash
-ollama list
-```
-
-**Configure:**
-```bash
-# Copy template
-cp .env.example .env
-
-# Edit .env file
-# Leave GROQ_API_KEY empty
-# Ensure OLLAMA_BASE_URL is set:
-OLLAMA_BASE_URL=http://localhost:11434
-```
-
-### Option C: Both (Best of Both Worlds)
-
-Configure both Groq and Ollama. The system will use Groq by default if API key is present, but fall back to Ollama if needed.
 
 ## 📊 Step 4: Load Medical Knowledge
 
@@ -299,12 +255,12 @@ pip install -r requirements.txt --force-reinstall
 ```
 
 ### Issue: "Failed to initialize agents"
-**Cause**: API key or Ollama not configured
+**Cause**: API key not configured
 
 **Solution:**
 1. Check `.env` file exists
-2. Verify API key is correct
-3. If using Ollama, ensure it's running: `ollama list`
+2. Verify GROQ_API_KEY is correct
+3. Ensure you have internet connection
 
 ### Issue: "ChromaDB not found"
 **Cause**: Data ingestion not run
@@ -337,7 +293,7 @@ python -c "from transformers import AutoModel; AutoModel.from_pretrained('nickmu
 
 ### Issue: "Slow responses"
 **Solution:**
-1. Use Groq instead of Ollama (much faster)
+1. Check your internet connection
 2. Reduce `TOP_K_RETRIEVAL` in `config.py`
 3. Close other applications
 

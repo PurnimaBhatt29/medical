@@ -104,7 +104,7 @@ MedVision AI is a production-ready, multimodal RAG-based medical assistant that 
 │                      Model Layer                             │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
 │  │  Embedding   │  │     LLM      │  │    Vision    │     │
-│  │    Model     │  │ (Groq/Ollama)│  │    Model     │     │
+│  │    Model     │  │    (Groq)    │  │    Model     │     │
 │  │ (SentenceTr) │  │              │  │ (HuggingFace)│     │
 │  └──────────────┘  └──────────────┘  └──────────────┘     │
 │  ┌──────────────┐                                           │
@@ -143,7 +143,6 @@ medvision-ai/
 │
 ├── requirements.txt                # Python dependencies
 ├── .env.example                    # Environment template
-├── .gitignore                      # Git ignore rules
 │
 ├── README.md                       # Main documentation
 ├── SETUP_GUIDE.md                  # Detailed setup instructions
@@ -250,7 +249,6 @@ confidence = (0.35*faithfulness + 0.25*relevance +
 
 ### Speed
 - **Groq**: ~1-2 seconds per query (fast)
-- **Ollama**: ~5-10 seconds per query (local)
 - **Embedding**: ~50ms per document
 - **Retrieval**: ~100ms for top-10
 - **Reranking**: ~200ms for cross-encoder
@@ -345,7 +343,7 @@ This project demonstrates:
 - **ChromaDB**: Vector database
 - **Sentence Transformers**: Embeddings
 - **HuggingFace**: Vision models
-- **Groq/Ollama**: LLM inference
+- **Groq**: LLM inference
 - **PyPDF2**: PDF processing
 
 ### Research Papers

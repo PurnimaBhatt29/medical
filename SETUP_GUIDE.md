@@ -47,11 +47,8 @@ sudo apt install python3.11 python3.11-venv python3-pip
 ### Step 2: Clone or Download Project
 
 ```bash
-# If using git
-git clone <repository-url>
+# Navigate to the project directory
 cd medvision-ai
-
-# Or download and extract ZIP file
 ```
 
 ### Step 3: Create Virtual Environment
@@ -105,36 +102,8 @@ cp .env.example .env
 3. Edit `.env`:
 ```env
 GROQ_API_KEY=gsk_your_actual_api_key_here
-OLLAMA_BASE_URL=http://localhost:11434
 HF_TOKEN=
 ```
-
-### Option 2: Using Ollama (Local & Private)
-
-1. Install Ollama:
-   - **Windows/Mac**: Download from [ollama.ai](https://ollama.ai)
-   - **Linux**: `curl -fsSL https://ollama.ai/install.sh | sh`
-
-2. Pull model:
-```bash
-ollama pull llama3
-```
-
-3. Verify Ollama is running:
-```bash
-ollama list
-```
-
-4. Configure `.env`:
-```env
-GROQ_API_KEY=
-OLLAMA_BASE_URL=http://localhost:11434
-HF_TOKEN=
-```
-
-### Option 3: Both (Recommended for Production)
-
-Configure both Groq and Ollama. The system will use Groq by default if API key is present.
 
 ## 📊 Data Ingestion
 
@@ -293,10 +262,7 @@ pip install -r requirements.txt --force-reinstall
 cat .env  # Linux/Mac
 type .env  # Windows
 
-# Verify Ollama is running (if using Ollama)
-ollama list
-
-# Test Groq API key (if using Groq)
+# Test Groq API key
 curl https://api.groq.com/openai/v1/models \
   -H "Authorization: Bearer $GROQ_API_KEY"
 ```
@@ -337,7 +303,7 @@ python -c "from transformers import AutoModel; AutoModel.from_pretrained('nickmu
 
 ### For Faster Inference:
 
-1. **Use Groq**: Much faster than local Ollama
+1. **Check Internet**: Ensure stable connection to Groq
 2. **GPU Acceleration**: Install CUDA for PyTorch
 3. **Reduce Retrieval**: Lower `TOP_K_RETRIEVAL` in config
 4. **Cache Results**: Streamlit caching is enabled
@@ -360,9 +326,9 @@ python -c "from transformers import AutoModel; AutoModel.from_pretrained('nickmu
 ## 📞 Getting Help
 
 - **Documentation**: See README.md
-- **Issues**: Check GitHub issues
 - **Configuration**: Review config.py
 - **Logs**: Check terminal output
+- **Troubleshooting**: See GETTING_STARTED.md
 
 ---
 

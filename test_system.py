@@ -206,35 +206,24 @@ def test_llm_connection():
     import config
     
     # Test Groq
-    if config.GROQ_API_KEY:
-        try:
-            from langchain_groq import ChatGroq
-            llm = ChatGroq(
-                api_key=config.GROQ_API_KEY,
-                model_name=config.GROQ_MODEL,
-                temperature=0.3
-            )
-            response = llm.invoke("Say 'test successful'")
-            print(f"✓ Groq connection successful")
-            print(f"  - Model: {config.GROQ_MODEL}")
-            return True
-        except Exception as e:
-            print(f"✗ Groq error: {e}")
+    if not config.GROQ_API_KEY:
+        print("✗ GROQ_API_KEY not configured")
+        print("  Please set GROQ_API_KEY in your .env file")
+        return False
     
-    # Test Ollama
     try:
-        from langchain_community.llms import Ollama
-        llm = Ollama(
-            model=config.OLLAMA_MODEL,
-            base_url=config.OLLAMA_BASE_URL
+        from langchain_groq import ChatGroq
+        llm = ChatGroq(
+            api_key=config.GROQ_API_KEY,
+            model_name=config.GROQ_MODEL,
+            temperature=0.3
         )
         response = llm.invoke("Say 'test successful'")
-        print(f"✓ Ollama connection successful")
-        print(f"  - Model: {config.OLLAMA_MODEL}")
+        print(f"✓ Groq connection successful")
+        print(f"  - Model: {config.GROQ_MODEL}")
         return True
     except Exception as e:
-        print(f"✗ Ollama error: {e}")
-        print(f"  Make sure Ollama is running: ollama serve")
+        print(f"✗ Groq error: {e}")
         return False
 
 
