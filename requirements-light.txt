@@ -1,3 +1,6 @@
+# Lightweight version for Streamlit Cloud deployment
+# Use this if the main requirements.txt fails
+
 streamlit==1.32.0
 langchain==0.1.16
 langchain-community==0.0.38
@@ -14,7 +17,9 @@ beautifulsoup4==4.12.3
 python-dotenv==1.0.1
 groq==0.8.0
 tqdm==4.66.4
-faiss-cpu==1.8.0
 streamlit-option-menu==0.3.12
-chromadb==0.4.24
-pydantic==2.7.1
+
+# Lighter alternatives (uncomment if needed)
+# chromadb==0.4.24  # May cause issues on Streamlit Cloud
+# torch==2.3.0      # Very large, may exceed memory
+# faiss-cpu==1.8.0  # Alternative vector search
