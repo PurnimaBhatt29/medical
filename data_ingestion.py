@@ -32,17 +32,36 @@ class MedicalDataIngestion:
         self.cross_encoder = CrossEncoder(config.CROSS_ENCODER_MODEL)
         
         # Initialize RAG pipeline (with dummy LLM for ingestion)
-        # Initialize LLM with Groq
-        if not config.GROQ_API_KEY:
-            print("⚠️ GROQ_API_KEY is required for data ingestion. Please set it in your .env file.")
-            return
+        # Initialize LLM - Try Groq first, then Ollama
+        llm = None
         
-        from langchain_groq import ChatGroq
-        llm = ChatGroq(
-            api_key=config.GROQ_API_KEY,
-            model_name=config.GROQ_MODEL,
-            temperature=0.3
-        )
+        if config.GROQ_API_KEY:
+            try:
+                from langchain_groq import ChatGroq
+                llm = ChatGroq(
+                    api_key=config.GROQ_API_KEY,
+                    model_name=config.GROQ_MODEL,
+                    temperature=0.3
+                )
+                print("✓ Using Groq API for LLM")
+            except Exception as e:
+                print(f"⚠️ Groq initialization failed: {str(e)}")
+        
+        if llm is None and config.OLLAMA_BASE_URL:
+            try:
+                from langchain_ollama import OllamaLLM
+                llm = OllamaLLM(
+                    model=config.OLLAMA_MODEL,
+                    base_url=config.OLLAMA_BASE_URL
+                )
+                print("✓ Using Ollama (local) for LLM")
+            except Exception as e:
+                print(f"⚠️ Ollama initialization failed: {str(e)}")
+        
+        if llm is None:
+            print("⚠️ No LLM configured for data ingestion.")
+            print("Please set GROQ_API_KEY or OLLAMA_BASE_URL in your .env file.")
+            return
 
         self.rag_pipeline = RAGPipeline(
             llm=llm,

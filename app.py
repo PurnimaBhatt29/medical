@@ -164,18 +164,36 @@ init_session_state()
 def initialize_agents():
     """Initialize all agents with LLM and RAG pipeline"""
     try:
-        # Initialize LLM with Groq
-        if not config.GROQ_API_KEY:
-            st.error("⚠️ GROQ_API_KEY is not configured. Please add it to Streamlit secrets.")
-            st.info("Go to App settings → Secrets and add: GROQ_API_KEY = 'your_key_here'")
-            st.stop()
+        # Initialize LLM - Try Groq first, then Ollama
+        llm = None
         
-        from langchain_groq import ChatGroq
-        llm = ChatGroq(
-            api_key=config.GROQ_API_KEY,
-            model_name=config.GROQ_MODEL,
-            temperature=0.3
-        )
+        if config.GROQ_API_KEY:
+            try:
+                from langchain_groq import ChatGroq
+                llm = ChatGroq(
+                    api_key=config.GROQ_API_KEY,
+                    model_name=config.GROQ_MODEL,
+                    temperature=0.3
+                )
+                st.success("✅ Using Groq API for LLM")
+            except Exception as e:
+                st.warning(f"⚠️ Groq initialization failed: {str(e)}")
+        
+        if llm is None and config.OLLAMA_BASE_URL:
+            try:
+                from langchain_ollama import OllamaLLM
+                llm = OllamaLLM(
+                    model=config.OLLAMA_MODEL,
+                    base_url=config.OLLAMA_BASE_URL
+                )
+                st.success("✅ Using Ollama (local) for LLM")
+            except Exception as e:
+                st.warning(f"⚠️ Ollama initialization failed: {str(e)}")
+        
+        if llm is None:
+            st.error("❌ No LLM configured!")
+            st.info("Please configure either:\n- GROQ_API_KEY (recommended, cloud-based)\n- OLLAMA_BASE_URL (local, private)")
+            st.stop()
         
         # Initialize RAG pipeline
         rag_pipeline = RAGPipeline(

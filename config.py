@@ -8,16 +8,19 @@ try:
     import streamlit as st
     # On Streamlit Cloud, use st.secrets
     GROQ_API_KEY = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY", ""))
+    OLLAMA_BASE_URL = st.secrets.get("OLLAMA_BASE_URL", os.getenv("OLLAMA_BASE_URL", ""))
     HF_TOKEN = st.secrets.get("HF_TOKEN", os.getenv("HF_TOKEN", ""))
 except (ImportError, FileNotFoundError):
     # Local development, use environment variables
     GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+    OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "")
     HF_TOKEN = os.getenv("HF_TOKEN", "")
 
 # Model Configuration
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 VISION_MODEL = "nickmuchi/vit-finetuned-chest-xray-pneumonia"
 CROSS_ENCODER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+OLLAMA_MODEL = "llama3"
 GROQ_MODEL = "llama-3.3-70b-versatile"
 
 # Chunking Configuration
