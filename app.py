@@ -678,6 +678,12 @@ def evaluation_page(agents, rag_pipeline):
                 docs = retriever.retrieve(query, top_k=5, rerank_top_k=5)
                 contexts = [doc.page_content for doc in docs]
                 
+                # Debug: Check if contexts were retrieved
+                if not contexts:
+                    st.warning("⚠️ No contexts retrieved from knowledge base. Metrics may be inaccurate.")
+                else:
+                    st.success(f"✅ Retrieved {len(contexts)} context chunks for evaluation")
+                
                 # Evaluate
                 progress_bar.progress(90)
                 # pass ground truth contexts if any
@@ -693,6 +699,13 @@ def evaluation_page(agents, rag_pipeline):
                     # Display response
                     st.markdown("### 💬 Generated Response")
                     st.info(response)
+                    
+                    # Debug info
+                    with st.expander("🔍 Debug Info"):
+                        st.write(f"Query length: {len(query)} chars")
+                        st.write(f"Response length: {len(response)} chars")
+                        st.write(f"Contexts retrieved: {len(contexts)}")
+                        st.write(f"First context preview: {contexts[0][:200] if contexts else 'EMPTY'}...")
                     
                     # Metrics
                     st.markdown("### 📊 Evaluation Metrics")
@@ -710,6 +723,7 @@ def evaluation_page(agents, rag_pipeline):
                         
                         # show retrieval metrics (these are computed only with ground truth snippets)
                         st.markdown("#### Retrieval Metrics")
+                        st.caption("ℹ️ These metrics require ground-truth contexts (see input above)")
 
                         st.markdown("**Precision**")
                         st.progress(result.get('precision', 0.0))
@@ -724,7 +738,7 @@ def evaluation_page(agents, rag_pipeline):
 
                         if not result.get('retrieval_metrics_computed', False):
                             st.info(
-                                "Provide ground-truth relevant context snippets above (one per line) to compute Retrieval Precision, Recall, and MRR."
+                                "💡 To compute Precision, Recall, and MRR: Copy relevant text snippets from the retrieved contexts and paste them in the 'Ground-truth relevant contexts' field above, then re-run the evaluation."
                             )
                     
                     with col2:
@@ -753,6 +767,16 @@ def evaluation_page(agents, rag_pipeline):
                     with st.expander("ℹ️ Understanding the Metrics"):
                         for metric, explanation in result['metrics_explanation'].items():
                             st.markdown(f"**{metric.title()}:** {explanation}")
+                    
+                    # Show retrieved contexts
+                    with st.expander("📚 Retrieved Contexts Used for Evaluation"):
+                        if contexts:
+                            for i, ctx in enumerate(contexts, 1):
+                                st.markdown(f"**Context {i}:**")
+                                st.text(ctx[:500] + "..." if len(ctx) > 500 else ctx)
+                                st.divider()
+                        else:
+                            st.warning("No contexts were retrieved.")
                 
                 else:
                     st.error(f"❌ Error: {result.get('error', 'Unknown error')}")
