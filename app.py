@@ -166,9 +166,9 @@ def initialize_agents():
     try:
         # Initialize LLM with Groq
         if not config.GROQ_API_KEY:
-            raise ValueError(
-                "GROQ_API_KEY is required. Please set it in your .env file or environment variables."
-            )
+            st.error("⚠️ GROQ_API_KEY is not configured. Please add it to Streamlit secrets.")
+            st.info("Go to App settings → Secrets and add: GROQ_API_KEY = 'your_key_here'")
+            st.stop()
         
         from langchain_groq import ChatGroq
         llm = ChatGroq(
@@ -184,6 +184,16 @@ def initialize_agents():
             cross_encoder_name=config.CROSS_ENCODER_MODEL,
             chroma_persist_dir=config.CHROMA_PERSIST_DIR
         )
+        
+        # Check if ChromaDB has data
+        try:
+            collection = rag_pipeline.get_or_create_collection("medical_knowledge")
+            count = collection.count()
+            if count == 0:
+                st.warning("⚠️ Medical knowledge base is empty. Some features may not work properly.")
+                st.info("To populate the database, run: `python data_ingestion.py` locally and upload the chroma_db folder.")
+        except Exception as e:
+            st.warning(f"⚠️ ChromaDB warning: {str(e)}")
         
         # Initialize embedding model for evaluation
         embedding_model = SentenceTransformer(config.EMBEDDING_MODEL)
@@ -201,7 +211,8 @@ def initialize_agents():
         return agents, rag_pipeline
     
     except Exception as e:
-        st.error(f"Error initializing agents: {str(e)}")
+        st.error(f"❌ Error initializing agents: {str(e)}")
+        st.info("Please check your configuration and try again.")
         return None, None
 
 

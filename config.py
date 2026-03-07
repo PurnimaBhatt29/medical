@@ -3,9 +3,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# API Configuration
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-HF_TOKEN = os.getenv("HF_TOKEN", "")
+# Try to import streamlit for secrets (when deployed on Streamlit Cloud)
+try:
+    import streamlit as st
+    # On Streamlit Cloud, use st.secrets
+    GROQ_API_KEY = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY", ""))
+    HF_TOKEN = st.secrets.get("HF_TOKEN", os.getenv("HF_TOKEN", ""))
+except (ImportError, FileNotFoundError):
+    # Local development, use environment variables
+    GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+    HF_TOKEN = os.getenv("HF_TOKEN", "")
 
 # Model Configuration
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
