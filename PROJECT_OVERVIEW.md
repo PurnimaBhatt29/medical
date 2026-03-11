@@ -56,57 +56,57 @@ MedVision AI is a production-ready, multimodal RAG-based medical assistant that 
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     Streamlit Frontend                       │
+│                     Streamlit Frontend                      │
 │  (Beautiful Medical-Themed UI with Glassmorphism)           │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                      Agent Layer                             │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
-│  │   Report     │  │    X-ray     │  │ Prescription │     │
-│  │   Analyzer   │  │    Vision    │  │   Analyzer   │     │
-│  └──────────────┘  └──────────────┘  └──────────────┘     │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
-│  │   Medicine   │  │   Medical    │  │  Evaluation  │     │
-│  │  Knowledge   │  │     Chat     │  │    Agent     │     │
-│  └──────────────┘  └──────────────┘  └──────────────┘     │
-│                   All extend BaseAgent                       │
+│                      Agent Layer                            │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
+│  │   Report     │  │    X-ray     │  │ Prescription │       │
+│  │   Analyzer   │  │    Vision    │  │   Analyzer   │       │
+│  └──────────────┘  └──────────────┘  └──────────────┘       │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
+│  │   Medicine   │  │   Medical    │  │  Evaluation  │       │
+│  │  Knowledge   │  │     Chat     │  │    Agent     │       │
+│  └──────────────┘  └──────────────┘  └──────────────┘       │
+│                   All extend BaseAgent                      │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                    RAG Pipeline Layer                        │
-│  ┌────────────────────────────────────────────────────┐    │
-│  │  HyDE Retriever                                     │    │
-│  │  1. Generate hypothetical answer                    │    │
-│  │  2. Embed hypothetical answer                       │    │
-│  │  3. Similarity search in vector DB                  │    │
-│  │  4. Cross-encoder reranking                         │    │
-│  │  5. Return top-k documents                          │    │
-│  └────────────────────────────────────────────────────┘    │
+│                    RAG Pipeline Layer                       │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │  HyDE Retriever                                    │     │
+│  │  1. Generate hypothetical answer                   │     │
+│  │  2. Embed hypothetical answer                      │     │
+│  │  3. Similarity search in vector DB                 │     │
+│  │  4. Cross-encoder reranking                        │     │
+│  │  5. Return top-k documents                         │     │
+│  └────────────────────────────────────────────────────┘     │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                   Vector Database Layer                      │
-│  ┌────────────────────────────────────────────────────┐    │
-│  │  ChromaDB (Persistent)                              │    │
-│  │  - Medical knowledge collection                     │    │
-│  │  - Temporary upload collections                     │    │
-│  │  - Parent-child chunk storage                       │    │
-│  │  - Metadata indexing                                │    │
-│  └────────────────────────────────────────────────────┘    │
+│                   Vector Database Layer                     │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │  ChromaDB (Persistent)                             │     │
+│  │  - Medical knowledge collection                    │     │
+│  │  - Temporary upload collections                    │     │
+│  │  - Parent-child chunk storage                      │     │
+│  │  - Metadata indexing                               │     │
+│  └────────────────────────────────────────────────────┘     │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                      Model Layer                             │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
-│  │  Embedding   │  │     LLM      │  │    Vision    │     │
-│  │    Model     │  │    (Groq)    │  │    Model     │     │
-│  │ (SentenceTr) │  │              │  │ (HuggingFace)│     │
-│  └──────────────┘  └──────────────┘  └──────────────┘     │
+│                      Model Layer                            │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
+│  │  Embedding   │  │     LLM      │  │    Vision    │       │
+│  │    Model     │  │    (Groq)    │  │    Model     │       │
+│  │ (SentenceTr) │  │              │  │ (HuggingFace)│       │
+│  └──────────────┘  └──────────────┘  └──────────────┘       │
 │  ┌──────────────┐                                           │
 │  │    Cross     │                                           │
 │  │   Encoder    │                                           │
